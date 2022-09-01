@@ -1,8 +1,15 @@
-module com.tgs.javaduplicatefilefinder {
+module application {
     requires javafx.controls;
     requires javafx.fxml;
 
+    opens application to javafx.fxml;
+    exports application;
 
-    opens com.tgs.javaduplicatefilefinder to javafx.fxml;
-    exports com.tgs.javaduplicatefilefinder;
+    opens entities to javafx.fxml;
+    exports entities;
+
+    exports controller;
+    opens controller to javafx.fxml;
+
+
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="800.0">
+        <menus>
+          <Menu fx:id="menuFile" mnemonicParsing="false" text="Arquivo">
+            <items>
+              <MenuItem fx:id="menuItemNewSearch" mnemonicParsing="false" text="Nova Pesquisa" />
+            </items>
+          </Menu>
+          <Menu fx:id="menuAbout" mnemonicParsing="false" text="Sobre" />
+        </menus>
+      </MenuBar>
+      <TextField fx:id="textFieldFilePath" layoutX="179.0" layoutY="38.0" prefHeight="25.0" prefWidth="607.0" />
+      <Button fx:id="buttonSelectPath" layoutX="14.0" layoutY="38.0" mnemonicParsing="false" onAction="#buttonSelectPathClick" prefHeight="25.0" prefWidth="160.0" text="Selecionar Caminho" />
+      <ScrollPane layoutX="14.0" layoutY="78.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="514.0" prefWidth="772.0">
+         <content>
+            <TableView fx:id="tableViewFiles" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="501.0" prefWidth="774.0">
+              <columns>
+                <TableColumn fx:id="tableColumnFileName" prefWidth="132.0" text="Arquivo" />
+                  <TableColumn fx:id="tableColumnFileSize" prefWidth="39.0" text="MB" />
+                <TableColumn fx:id="tableColumnFilePath" prefWidth="470.0" text="Caminho" />
+                  <TableColumn fx:id="tableColumnButtonOpenFolder" prefWidth="130.0" text="Abrir Pasta" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </children>
+</Pane>

@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.tgs.javaduplicatefilefinder/com.tgs.javaduplicatefilefinder.MainApplication
+                                com.tgs.javaduplicatefilefinder/com.tgs.javaduplicatefilefinder.application.MainApplication
                             </mainClass>
                         </configuration>
                     </execution>
