@@ -15,6 +15,8 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Java Duplicator File Finder!");
         stage.setScene(scene);
+        stage.setResizable(false);
+
         stage.show();
     }
 

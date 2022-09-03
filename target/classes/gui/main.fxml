@@ -8,8 +8,10 @@
    <children>
       <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="800.0">
         <menus>
-          <Menu fx:id="menuFile" mnemonicParsing="false" text="Arquivo">
+          <Menu fx:id="menuFile" mnemonicParsing="false" text="Pesquisa">
             <items>
+                  <MenuItem fx:id="menuItemSearch" mnemonicParsing="false" onAction="#menuItemSearchAction" text="Iniciar Pesquisa" />
+                  <MenuItem fx:id="menuItemStop" mnemonicParsing="false" text="Parar Pesquisa" />
               <MenuItem fx:id="menuItemNewSearch" mnemonicParsing="false" text="Nova Pesquisa" />
             </items>
           </Menu>
@@ -17,7 +19,7 @@
         </menus>
       </MenuBar>
       <TextField fx:id="textFieldFilePath" layoutX="179.0" layoutY="38.0" prefHeight="25.0" prefWidth="607.0" />
-      <Button fx:id="buttonSelectPath" layoutX="14.0" layoutY="38.0" mnemonicParsing="false" onAction="#buttonSelectPathClick" prefHeight="25.0" prefWidth="160.0" text="Selecionar Caminho" />
+      <Button fx:id="buttonSelectPath" layoutX="14.0" layoutY="38.0" mnemonicParsing="false" onAction="#buttonSelectPathAction" prefHeight="25.0" prefWidth="160.0" text="Selecionar Caminho" />
       <ScrollPane layoutX="14.0" layoutY="78.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="514.0" prefWidth="772.0">
          <content>
             <TableView fx:id="tableViewFiles" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="501.0" prefWidth="774.0">

@@ -10,6 +10,8 @@ module application {
 
     exports controller;
     opens controller to javafx.fxml;
+    exports services;
+    opens services to javafx.fxml;
 
 
 }
