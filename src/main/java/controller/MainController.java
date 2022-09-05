@@ -1,9 +1,7 @@
 package controller;
 
-import application.MainApplication;
 import entities.DuplicatedFile;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
@@ -11,6 +9,10 @@ import services.Scan;
 import util.Alerts;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 public class MainController {
 
@@ -47,15 +49,26 @@ public class MainController {
     @FXML
     private TableColumn<DuplicatedFile,Button> tableColumnButtonOpenFolder;
 
+    @FXML
+    private Label labelScanningNow;
+
     private Scan scanner;
 
-    private File selectedDirectory;
+    private Path selectedDirectory;
 
     public MainController() {}
 
     public void menuItemSearchAction(){
         getTypedPath();
-        //scanner = new Scan(selectedDirectory,tableViewFiles,tableColumnFileName,tableColumnFileSize,tableColumnFilePath,tableColumnButtonOpenFolder);
+        scanner = new Scan(selectedDirectory,labelScanningNow);
+    }
+
+    public void menuItemStopAction(){
+
+        if (scanner != null) {
+            scanner.stop();
+            scanner = new Scan(selectedDirectory,labelScanningNow);
+        }
     }
 
     public void buttonSelectPathAction(ActionEvent e){
@@ -68,10 +81,10 @@ public class MainController {
             (selectedDirectory.toString().equals(textFieldFilePath.getText())) ) {
             return;
         }
+        selectedDirectory = Paths.get(Objects.requireNonNull(textFieldFilePath.getText()));
 
-        selectedDirectory = new File(textFieldFilePath.getText());
 
-        if ( !selectedDirectory.isDirectory() ) {
+        if ( !Files.isDirectory(selectedDirectory) ) {
             Alerts.showAlert("Erro!","Caminho selecionado não é uma pasta!","Selecione um caminho válido!", Alert.AlertType.ERROR);
             throw new IllegalArgumentException("Typed directory is not a folder!");
         }
@@ -82,18 +95,20 @@ public class MainController {
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
 
-        if (selectedDirectory != null && selectedDirectory.isDirectory()) {
-            directoryChooser.setInitialDirectory(selectedDirectory);
+        if (selectedDirectory != null && Files.isDirectory(selectedDirectory)) {
+            directoryChooser.setInitialDirectory(selectedDirectory.toFile());
         }
 
-        selectedDirectory = directoryChooser.showDialog(buttonSelectPath.getScene().getWindow());
+        File pickedDirectory = directoryChooser.showDialog(buttonSelectPath.getScene().getWindow());
 
-        if (selectedDirectory != null) {
+        if (pickedDirectory != null) {
+            selectedDirectory = pickedDirectory.toPath();
             textFieldFilePath.setText(selectedDirectory.toString());
         }
 
-    }
 
+
+    }
 
 
 }

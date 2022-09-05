@@ -16,8 +16,8 @@ public class MainApplication extends Application {
         stage.setTitle("Java Duplicator File Finder!");
         stage.setScene(scene);
         stage.setResizable(false);
-
         stage.show();
+
     }
 
     public static void main(String[] args) {

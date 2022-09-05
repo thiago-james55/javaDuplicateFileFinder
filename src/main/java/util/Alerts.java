@@ -2,9 +2,6 @@ package util;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-
-import java.util.Optional;
 
 public class Alerts {
 
@@ -14,6 +11,7 @@ public class Alerts {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.show();
+
     }
 
 }

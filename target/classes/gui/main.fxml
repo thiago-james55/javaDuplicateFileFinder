@@ -4,14 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
       <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="800.0">
         <menus>
           <Menu fx:id="menuFile" mnemonicParsing="false" text="Pesquisa">
             <items>
                   <MenuItem fx:id="menuItemSearch" mnemonicParsing="false" onAction="#menuItemSearchAction" text="Iniciar Pesquisa" />
-                  <MenuItem fx:id="menuItemStop" mnemonicParsing="false" text="Parar Pesquisa" />
+                  <MenuItem fx:id="menuItemStop" mnemonicParsing="false" onAction="#menuItemStopAction" text="Parar Pesquisa" />
               <MenuItem fx:id="menuItemNewSearch" mnemonicParsing="false" text="Nova Pesquisa" />
             </items>
           </Menu>
@@ -32,5 +32,7 @@
             </TableView>
          </content>
       </ScrollPane>
+      <Label fx:id="labelFilesScanned" layoutX="14.0" layoutY="608.0" prefHeight="17.0" prefWidth="118.0" text="Arquivos Escaneados:" />
+      <Label fx:id="labelTotalScanned" layoutX="130.0" layoutY="608.0" prefHeight="17.0" prefWidth="705.0" />
    </children>
 </Pane>
