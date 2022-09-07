@@ -45,7 +45,7 @@ public class Scan{
 
         scanning = false;
         thread.interrupt();
-        System.out.println(scanning);
+
     }
 
     private void getRoots(Path path) {
@@ -75,7 +75,7 @@ public class Scan{
                             currentScanned = localFile.toString();
                             updateLabel();
                         } else {
-                            scanning = false;
+                            break;
                         }
                     } catch (Exception e) { System.out.println(e.getMessage()); }
                 }
@@ -85,6 +85,8 @@ public class Scan{
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
+
+                scanning = false;
 
             }
 
@@ -110,12 +112,15 @@ public class Scan{
 
         for (File file: files) {
 
+            if (!scanning) { break; }
+
             String localMD5 = GenerateFileMD5.generateMD5(file);
 
             if (filesMap.containsKey(localMD5)){
                 dupes.add(new DuplicatedFile(filesMap.get(localMD5)));
                 dupes.add(new DuplicatedFile(file));
-
+                currentScanned = file.toString();
+                updateLabel();
             } else {
                 filesMap.put(GenerateFileMD5.generateMD5(file),file);
             }
@@ -131,7 +136,9 @@ public class Scan{
 
     }
 
-
+    public boolean isScanning() {
+        return scanning;
+    }
 }
 
 

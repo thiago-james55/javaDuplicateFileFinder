@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AboutController">
+   <children>
+      <ImageView fx:id="imageViewPhoto" fitHeight="190.0" fitWidth="190.0" layoutX="105.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         </ImageView>
+      <Label layoutX="106.0" layoutY="233.0" text="Criado por Thiago Gonçalves Souza" />
+      <Hyperlink fx:id="hyperLink" layoutX="122.0" layoutY="262.0" text="github.com/thiago-james55" />
+      <Label layoutX="34.0" layoutY="308.0" text="Projeto criado para aperfeiçoar as habilidades de programação," />
+      <Label layoutX="38.0" layoutY="331.0" text="procura por arquivos duplicados no sistema utilizando o Hash" />
+      <Label layoutX="139.0" layoutY="355.0" text="MD5 para compara-los!" />
+   </children>
+</AnchorPane>

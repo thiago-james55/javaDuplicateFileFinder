@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -10,28 +9,32 @@
         <menus>
           <Menu fx:id="menuFile" mnemonicParsing="false" text="Pesquisa">
             <items>
+              <MenuItem fx:id="menuItemNewSearch" mnemonicParsing="false" onAction="#setMenuItemNewSearchAction" text="Nova Pesquisa" />
                   <MenuItem fx:id="menuItemSearch" mnemonicParsing="false" onAction="#menuItemSearchAction" text="Iniciar Pesquisa" />
                   <MenuItem fx:id="menuItemStop" mnemonicParsing="false" onAction="#menuItemStopAction" text="Parar Pesquisa" />
-              <MenuItem fx:id="menuItemNewSearch" mnemonicParsing="false" text="Nova Pesquisa" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" onAction="#menuAboutAction" text="Sobre" />
             </items>
           </Menu>
-          <Menu fx:id="menuAbout" mnemonicParsing="false" text="Sobre" />
+
         </menus>
       </MenuBar>
       <TextField fx:id="textFieldFilePath" layoutX="179.0" layoutY="38.0" prefHeight="25.0" prefWidth="607.0" />
       <Button fx:id="buttonSelectPath" layoutX="14.0" layoutY="38.0" mnemonicParsing="false" onAction="#buttonSelectPathAction" prefHeight="25.0" prefWidth="160.0" text="Selecionar Caminho" />
-      <Pane layoutX="14.0" layoutY="78.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="514.0" prefWidth="772.0">
+       <Pane layoutX="14.0" layoutY="78.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+             prefHeight="514.0" prefWidth="772.0">
 
-            <TableView fx:id="tableViewFiles" maxHeight="501.0" maxWidth="774.0" minHeight="501.0" minWidth="774.0" prefHeight="501.0" prefWidth="774.0">
-              <columns>
-                <TableColumn fx:id="tableColumnFileName" editable="false" prefWidth="132.0" text="Arquivo" />
-                  <TableColumn fx:id="tableColumnFileSize" editable="false" prefWidth="39.0" text="MB" />
-                <TableColumn fx:id="tableColumnFilePath" editable="false" prefWidth="470.0" text="Caminho" />
-                  <TableColumn fx:id="tableColumnButtonOpenFolder" editable="false" maxWidth="130.0" prefWidth="130.0" resizable="false" text="Abrir Pasta" />
-              </columns>
-            </TableView>
-
-      </Pane>
+           <TableView fx:id="tableViewFiles" maxHeight="501.0" maxWidth="774.0" minHeight="501.0" minWidth="774.0"
+                      prefHeight="501.0" prefWidth="774.0">
+               <columns>
+               <TableColumn fx:id="tableColumnFileName" editable="false" prefWidth="132.0" text="Arquivo"/>
+                   <TableColumn fx:id="tableColumnFileSize" editable="false" prefWidth="39.0" text="MB"/>
+               <TableColumn fx:id="tableColumnFilePath" editable="false" prefWidth="470.0" text="Caminho"/>
+                   <TableColumn fx:id="tableColumnButtonOpenFolder" editable="false" maxWidth="130.0" prefWidth="130.0"
+                                resizable="false" text="Abrir Pasta"/>
+               </columns>
+           </TableView>
+       </Pane>
       <Label fx:id="labelFilesScanned" layoutX="14.0" layoutY="608.0" prefHeight="17.0" prefWidth="68.0" text="Escaneando:" />
       <Label fx:id="labelScanningNow" layoutX="82.0" layoutY="608.0" prefHeight="17.0" prefWidth="703.0" />
    </children>

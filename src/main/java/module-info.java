@@ -2,6 +2,7 @@ module application {
     requires javafx.controls;
     requires javafx.fxml;
     requires commons.codec;
+    requires java.desktop;
 
     opens application to javafx.fxml;
     exports application;

@@ -87,6 +87,7 @@ public class DuplicatedFile {
                 }
             });
             openFolder.setText("Abrir pasta");
+            openFolder.setPrefWidth(110);
 
 
         }

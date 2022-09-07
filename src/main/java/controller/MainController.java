@@ -5,20 +5,30 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import services.Scan;
 import util.Alerts;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class MainController {
+
+public class MainController implements Initializable{
 
     @FXML
     private MenuItem menuItemSearch;
@@ -30,7 +40,7 @@ public class MainController {
     private MenuItem menuItemNewSearch;
 
     @FXML
-    private Menu menuAbout;
+    private MenuItem menuItemAbout;
 
     @FXML
     private Button buttonSelectPath;
@@ -63,9 +73,15 @@ public class MainController {
     public MainController() { }
 
     public void menuItemSearchAction(){
+
+        if (scanner != null) {
+            menuItemStopAction();
+        }
+
         getTypedPath();
         scanner = new Scan(selectedDirectory,labelScanningNow,this);
         scanner.init();
+
     }
 
     public void menuItemStopAction(){
@@ -74,6 +90,19 @@ public class MainController {
             scanner.stop();
             tableViewFiles.getItems().clear();
         }
+    }
+
+    public void setMenuItemNewSearchAction() {
+        menuItemStopAction();
+        labelScanningNow.setText("");
+        textFieldFilePath.setText("");
+    }
+
+    public void menuAboutAction(ActionEvent e) {
+
+        Stage parentStage = (Stage) ((MenuItem) e.getTarget()).getParentPopup().getOwnerWindow();
+        createDialogForm(parentStage);
+
     }
 
     public void buttonSelectPathAction(ActionEvent e){
@@ -114,10 +143,15 @@ public class MainController {
     }
 
     public void updateTable(List<DuplicatedFile> dupes) {
-        setTableFactory();
-        tableViewFiles.getItems().clear();
-        ObservableList<DuplicatedFile> duplicatedFiles = FXCollections.observableArrayList(dupes);
-        tableViewFiles.setItems(duplicatedFiles);
+
+        if (dupes != null && dupes.size() > 0) {
+
+            setTableFactory();
+            tableViewFiles.getItems().clear();
+            ObservableList<DuplicatedFile> duplicatedFiles = FXCollections.observableArrayList(dupes);
+            tableViewFiles.setItems(duplicatedFiles);
+
+        }
     }
 
     private void setTableFactory() {
@@ -127,5 +161,36 @@ public class MainController {
         tableColumnButtonOpenFolder.setCellValueFactory(new PropertyValueFactory<>("openFolder"));
     }
 
+    private void createDialogForm(Stage parentStage) {
 
+        try {
+
+            FXMLLoader loader = new FXMLLoader(AboutController.class.getResource("/gui/about.fxml"));
+
+            Pane pane = loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Sobre");
+            dialogStage.setScene(new Scene(pane));
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(parentStage);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        String path = Objects.requireNonNull(getClass().getResource("")).getPath();
+        File file = new File(path);
+
+        textFieldFilePath.setText(file.getPath());
+
+    }
 }
