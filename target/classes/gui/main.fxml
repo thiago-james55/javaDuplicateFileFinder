@@ -20,19 +20,19 @@
       </MenuBar>
       <TextField fx:id="textFieldFilePath" layoutX="179.0" layoutY="38.0" prefHeight="25.0" prefWidth="607.0" />
       <Button fx:id="buttonSelectPath" layoutX="14.0" layoutY="38.0" mnemonicParsing="false" onAction="#buttonSelectPathAction" prefHeight="25.0" prefWidth="160.0" text="Selecionar Caminho" />
-      <ScrollPane layoutX="14.0" layoutY="78.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="514.0" prefWidth="772.0">
-         <content>
-            <TableView fx:id="tableViewFiles" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="501.0" prefWidth="774.0">
+      <Pane layoutX="14.0" layoutY="78.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="514.0" prefWidth="772.0">
+
+            <TableView fx:id="tableViewFiles" maxHeight="501.0" maxWidth="774.0" minHeight="501.0" minWidth="774.0" prefHeight="501.0" prefWidth="774.0">
               <columns>
-                <TableColumn fx:id="tableColumnFileName" prefWidth="132.0" text="Arquivo" />
-                  <TableColumn fx:id="tableColumnFileSize" prefWidth="39.0" text="MB" />
-                <TableColumn fx:id="tableColumnFilePath" prefWidth="470.0" text="Caminho" />
-                  <TableColumn fx:id="tableColumnButtonOpenFolder" prefWidth="130.0" text="Abrir Pasta" />
+                <TableColumn fx:id="tableColumnFileName" editable="false" prefWidth="132.0" text="Arquivo" />
+                  <TableColumn fx:id="tableColumnFileSize" editable="false" prefWidth="39.0" text="MB" />
+                <TableColumn fx:id="tableColumnFilePath" editable="false" prefWidth="470.0" text="Caminho" />
+                  <TableColumn fx:id="tableColumnButtonOpenFolder" editable="false" maxWidth="130.0" prefWidth="130.0" resizable="false" text="Abrir Pasta" />
               </columns>
             </TableView>
-         </content>
-      </ScrollPane>
-      <Label fx:id="labelFilesScanned" layoutX="14.0" layoutY="608.0" prefHeight="17.0" prefWidth="118.0" text="Arquivos Escaneados:" />
-      <Label fx:id="labelTotalScanned" layoutX="130.0" layoutY="608.0" prefHeight="17.0" prefWidth="705.0" />
+
+      </Pane>
+      <Label fx:id="labelFilesScanned" layoutX="14.0" layoutY="608.0" prefHeight="17.0" prefWidth="68.0" text="Escaneando:" />
+      <Label fx:id="labelScanningNow" layoutX="82.0" layoutY="608.0" prefHeight="17.0" prefWidth="703.0" />
    </children>
 </Pane>

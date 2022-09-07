@@ -38,6 +38,14 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>20041127.091804</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

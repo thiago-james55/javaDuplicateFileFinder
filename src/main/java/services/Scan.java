@@ -1,24 +1,14 @@
 package services;
 
-
+import controller.MainController;
 import entities.DuplicatedFile;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import util.Alerts;
-
+import util.GenerateFileMD5;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.time.Duration;
 import java.util.*;
 
 public class Scan{
@@ -31,27 +21,31 @@ public class Scan{
 
     private String currentScanned;
 
-    Timeline update;
+    private MainController mainController;
 
     Thread thread;
 
     List<DuplicatedFile> duplicatedFiles = new ArrayList<>();
 
-    public Scan(Path selectedDirectory, Label totalScanned) {
+    public Scan(Path selectedDirectory, Label totalScanned, MainController mainController) {
 
         this.selectedDirectory = selectedDirectory;
         this.totalScanned = totalScanned;
+        this.mainController = mainController;
+
+    }
+
+    public void init() {
         currentScanned = selectedDirectory.toString();
         totalScanned.setText(currentScanned);
-
         getRoots(selectedDirectory);
-
     }
 
     public void stop() {
 
         scanning = false;
         thread.interrupt();
+        System.out.println(scanning);
     }
 
     private void getRoots(Path path) {
@@ -61,7 +55,6 @@ public class Scan{
         thread = new Thread(() -> {
 
             Path local;
-            scanning = true;
             List<File> files = new ArrayList<>();
 
             Iterator<Path> roots = null;
@@ -78,7 +71,7 @@ public class Scan{
                     try {
                         if (roots.hasNext()) {
                             localFile = roots.next().toFile();
-                            files.add(localFile);
+                            if (localFile.isFile()) { files.add(localFile); }
                             currentScanned = localFile.toString();
                             updateLabel();
                         } else {
@@ -87,6 +80,11 @@ public class Scan{
                     } catch (Exception e) { System.out.println(e.getMessage()); }
                 }
 
+                try {
+                    checkDuplicated(files);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
 
             }
 
@@ -103,6 +101,34 @@ public class Scan{
                 totalScanned.setText(currentScanned);
             }
         });
+    }
+
+    private void checkDuplicated(List<File> files) throws IOException {
+
+        Map<String, File> filesMap = new HashMap<>();
+        List<DuplicatedFile> dupes = new ArrayList<>();
+
+        for (File file: files) {
+
+            String localMD5 = GenerateFileMD5.generateMD5(file);
+
+            if (filesMap.containsKey(localMD5)){
+                dupes.add(new DuplicatedFile(filesMap.get(localMD5)));
+                dupes.add(new DuplicatedFile(file));
+
+            } else {
+                filesMap.put(GenerateFileMD5.generateMD5(file),file);
+            }
+
+        }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                mainController.updateTable(dupes);
+            }
+        });
+
     }
 
 

@@ -1,9 +1,12 @@
 package controller;
 
 import entities.DuplicatedFile;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.DirectoryChooser;
 import services.Scan;
 import util.Alerts;
@@ -12,6 +15,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
 
 public class MainController {
@@ -39,7 +43,7 @@ public class MainController {
 
     @FXML
     private TableColumn<DuplicatedFile,String> tableColumnFileName;
-    
+
     @FXML
     private TableColumn<DuplicatedFile,String> tableColumnFileSize;
 
@@ -56,18 +60,19 @@ public class MainController {
 
     private Path selectedDirectory;
 
-    public MainController() {}
+    public MainController() { }
 
     public void menuItemSearchAction(){
         getTypedPath();
-        scanner = new Scan(selectedDirectory,labelScanningNow);
+        scanner = new Scan(selectedDirectory,labelScanningNow,this);
+        scanner.init();
     }
 
     public void menuItemStopAction(){
 
         if (scanner != null) {
             scanner.stop();
-            scanner = new Scan(selectedDirectory,labelScanningNow);
+            tableViewFiles.getItems().clear();
         }
     }
 
@@ -106,8 +111,20 @@ public class MainController {
             textFieldFilePath.setText(selectedDirectory.toString());
         }
 
+    }
 
+    public void updateTable(List<DuplicatedFile> dupes) {
+        setTableFactory();
+        tableViewFiles.getItems().clear();
+        ObservableList<DuplicatedFile> duplicatedFiles = FXCollections.observableArrayList(dupes);
+        tableViewFiles.setItems(duplicatedFiles);
+    }
 
+    private void setTableFactory() {
+        tableColumnFileName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tableColumnFileSize.setCellValueFactory(new PropertyValueFactory<>("megaByte"));
+        tableColumnFilePath.setCellValueFactory(new PropertyValueFactory<>("path"));
+        tableColumnButtonOpenFolder.setCellValueFactory(new PropertyValueFactory<>("openFolder"));
     }
 
 
