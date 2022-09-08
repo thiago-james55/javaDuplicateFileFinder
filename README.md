@@ -1,5 +1,7 @@
-<h1>Java Duplicate File Finder</h2>
-<img/>
+<h1>🔍 Java Duplicate File Finder</h2>
+
+![javaDuplicator (Pequeno)](https://user-images.githubusercontent.com/87917583/189016643-814a3cbf-cb4e-43d4-93e8-9fbfdc18bf6b.png)
+
 
 <p>Programa JavaFX que localiza arquivos duplicados no sistema,<br/>utilizando
 comparação de Hash MD5 para uma avaliação mais precisa!</p>
@@ -10,7 +12,7 @@ desnecessarios, podendo ocupar espaço de recursos mais importantes, </br>
 ou na pior das hipóteses comprometem o desempenho do sistema!
 </p>
 
-<h2>Interface</h2>
+<h2>🖥️ Interface</h2>
 
 <ul>
 
@@ -35,12 +37,12 @@ ou na pior das hipóteses comprometem o desempenho do sistema!
 
 </ul>
 
-<h3>Nota do autor</h3>
+<h3>🖊️ Nota do autor</h3>
 <p>Gostei muito desse projeto , simplesmente veio em minha mente cria-lo, </br>
 devido a ser uns dos primeiros projetos sem mentoria tive algumas dificuldades, </br>
 que consegui superar, por lidar com arquivos de sistema existem muitos arquivos e pastas </br>
 que são inacessíveis e vez por outra lançam exceções. Conceitos de Thread do JavaFX </br>
-são bem dedicados, não podendo colocar metodos pesados na Thread da UI, para não dar Freeze. </br>
-Algoritmo de Hash, comparação precisa para não ter erro.Um experiencia magnifica!
+são bem dedicados, não podendo colocar métodos pesados na Thread da UI, para não dar Freeze. </br>
+Algoritmo de Hash, comparação precisa para não ter erro. Uma experiência magnifica!
 </p>
 
