@@ -72,7 +72,19 @@ public class MainController implements Initializable{
 
     public MainController() { }
 
+
+    public void setMenuItemNewSearchAction() {
+        menuItemStopAction();
+        labelScanningNow.setText("");
+
+        String path = Objects.requireNonNull(getClass().getResource("")).getPath();
+        File file = new File(path);
+
+        textFieldFilePath.setText(file.getPath());
+    }
+
     public void menuItemSearchAction(){
+
 
         if (scanner != null) {
             menuItemStopAction();
@@ -90,12 +102,6 @@ public class MainController implements Initializable{
             scanner.stop();
             tableViewFiles.getItems().clear();
         }
-    }
-
-    public void setMenuItemNewSearchAction() {
-        menuItemStopAction();
-        labelScanningNow.setText("");
-        textFieldFilePath.setText("");
     }
 
     public void menuAboutAction(ActionEvent e) {

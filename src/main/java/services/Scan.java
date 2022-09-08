@@ -112,8 +112,6 @@ public class Scan{
 
         for (File file: files) {
 
-            if (!scanning) { break; }
-
             String localMD5 = GenerateFileMD5.generateMD5(file);
 
             if (filesMap.containsKey(localMD5)){
@@ -139,6 +137,7 @@ public class Scan{
     public boolean isScanning() {
         return scanning;
     }
+
 }
 
 
